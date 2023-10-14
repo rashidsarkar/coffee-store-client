@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import swal from "sweetalert";
 import { CoffeeDataContext } from "../MainLayout/MainLayout";
+import axios from "axios";
 
 function AddCoffee() {
   const { fetchCoffeeData } = useContext(CoffeeDataContext);
@@ -33,20 +34,37 @@ function AddCoffee() {
     };
 
     // Send the coffeeData to your server (update the URL accordingly)
-    fetch("http://localhost:5000/coffee", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(coffeeData),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.insertedId) {
+    // fetch("http://localhost:5000/coffee", {
+    //   method: "POST",
+    //   headers: {
+    //     "content-type": "application/json",
+    //   },
+    //   body: JSON.stringify(coffeeData),
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     if (data.insertedId) {
+    //       // Refresh the coffeeData
+    //       fetchCoffeeData();
+    //       swal("Success", "Coffee added successfully!", "success");
+    //     }
+
+    axios
+      .post("http://localhost:5000/coffee", coffeeData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        if (response.data.insertedId) {
           // Refresh the coffeeData
           fetchCoffeeData();
           swal("Success", "Coffee added successfully!", "success");
         }
+      })
+      .catch((error) => {
+        console.log(error);
+        // Handle any errors here
       });
   };
 

@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { CoffeeDataContext } from "../MainLayout/MainLayout";
 import { useContext } from "react";
 import swal from "sweetalert";
+import axios from "axios";
 
 function UpdateCoffe() {
   const { coffeeData, fetchCoffeeData } = useContext(CoffeeDataContext);
@@ -41,17 +42,32 @@ function UpdateCoffe() {
       details,
       photo,
     };
-    fetch(`http://localhost:5000/coffee/${_id}`, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(updatecoffeeData),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        fetchCoffeeData();
+    // fetch(`http://localhost:5000/coffee/${_id}`, {
+    //   method: "PUT",
+    //   headers: {
+    //     "content-type": "application/json",
+    //   },
+    //   body: JSON.stringify(updatecoffeeData),
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     fetchCoffeeData();
+    //     swal("Success", "Coffee Update successfully!", "success");
+    //   });
+    axios
+      .put(`http://localhost:5000/coffee/${_id}`, updatecoffeeData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
         swal("Success", "Coffee Update successfully!", "success");
+        fetchCoffeeData();
+        console.log(response);
+      })
+      .catch((error) => {
+        // Handle any errors here
+        console.log(error);
       });
 
     // Send the coffeeData to your server (update the URL accordingly)
