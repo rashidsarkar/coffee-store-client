@@ -1,15 +1,14 @@
 import { useParams } from "react-router-dom";
 import { CoffeeDataContext } from "../MainLayout/MainLayout";
 import { useContext } from "react";
+import swal from "sweetalert";
 
 function UpdateCoffe() {
-  const { coffeeData } = useContext(CoffeeDataContext);
+  const { coffeeData, fetchCoffeeData } = useContext(CoffeeDataContext);
+
   const { id } = useParams();
   // Find the coffee to update using the 'id' parameter
   const coffeForUpdate = coffeeData.find((coffe) => coffe._id === id);
-  if (!coffeForUpdate) {
-    return <div>Loading...</div>; // Or handle the case when the coffee is not found
-  }
 
   const {
     coffeeName,
@@ -19,13 +18,12 @@ function UpdateCoffe() {
     category,
     details,
     photo,
-  } = coffeForUpdate;
+    _id,
+  } = coffeForUpdate || {};
   const handleUpdateCoffe = (e) => {
     e.preventDefault();
-
     // Create a new FormData object from the form
     const form = new FormData(e.currentTarget);
-
     // Get the values from the form fields
     const coffeeName = form.get("coffeeName");
     const availableQuantity = form.get("availableQuantity");
@@ -34,7 +32,7 @@ function UpdateCoffe() {
     const category = form.get("category");
     const details = form.get("details");
     const photo = form.get("photo");
-    const UpdatecoffeeData = {
+    const updatecoffeeData = {
       coffeeName,
       availableQuantity,
       supplier,
@@ -43,6 +41,18 @@ function UpdateCoffe() {
       details,
       photo,
     };
+    fetch(`http://localhost:5000/coffee/${_id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(updatecoffeeData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        fetchCoffeeData();
+        swal("Success", "Coffee Update successfully!", "success");
+      });
 
     // Send the coffeeData to your server (update the URL accordingly)
   };

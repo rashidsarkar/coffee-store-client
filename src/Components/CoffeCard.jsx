@@ -4,9 +4,9 @@ import { CoffeeDataContext } from "../MainLayout/MainLayout";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-function CoffeeCard({ coffee, setCoffeeOnDB }) {
-  const { coffeeData, fetchCoffeeData } = useContext(CoffeeDataContext);
-  const { coffeeName, _id, availableQuantity, supplier, taste, photo } = coffee;
+function CoffeeCard({ fetchCoffeeData, coffee }) {
+  const { coffeeName, _id, availableQuantity, supplier, taste, photo } =
+    coffee || {};
 
   const handleRemove = () => {
     swal({
@@ -21,9 +21,9 @@ function CoffeeCard({ coffee, setCoffeeOnDB }) {
           .delete(`http://localhost:5000/coffee/${_id}`)
           .then((res) => {
             console.log(res.data);
-            const remainingCoffee = coffeeData.filter((c) => c._id !== _id);
+
             fetchCoffeeData();
-            setCoffeeOnDB(remainingCoffee);
+
             swal("Success", "Coffee deleted successfully!", "success");
           })
           .catch((err) => {
@@ -47,9 +47,9 @@ function CoffeeCard({ coffee, setCoffeeOnDB }) {
       </figure>
       <div className="flex justify-between w-full px-5 py-2">
         <div>
-          <h2 className="card-title">Name: {coffeeName}</h2>
-          <p>Available Quantity: {availableQuantity}</p>
-          <p>Supplier: {supplier}</p>
+          <h2 className="card-title"> {coffeeName}</h2>
+          <p>Available Quantity: {availableQuantity} </p>
+          <p>Supplier: {supplier} </p>
           <p>Taste: {taste}</p>
         </div>
         <div className="justify-end card-actions">
