@@ -21,7 +21,7 @@ function NavBar() {
       </li>
       <li>
         <NavLink
-          to="/about"
+          to="/myCoffee"
           className={({ isActive, isPending }) =>
             isPending
               ? "pending"
@@ -30,12 +30,12 @@ function NavBar() {
               : ""
           }
         >
-          About Us
+          My Coffee
         </NavLink>
       </li>
       <li>
         <NavLink
-          to="/addCoffe"
+          to="/addCoffee"
           className={({ isActive, isPending }) =>
             isPending
               ? "pending"
@@ -44,21 +44,7 @@ function NavBar() {
               : ""
           }
         >
-          Add Coffe
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/updateCoffe"
-          className={({ isActive, isPending }) =>
-            isPending
-              ? "pending"
-              : isActive
-              ? "text-pink-500 font-semibold"
-              : ""
-          }
-        >
-          Update Coffe
+          Add Coffee
         </NavLink>
       </li>
     </>
@@ -105,7 +91,7 @@ function NavBar() {
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
-                <img src={user.photoURL || "photoURL"} />
+                <img src={user.photoURL || "userPhotoURL"} alt="User Photo" />
               </div>
             </label>
             <ul
@@ -124,7 +110,7 @@ function NavBar() {
               </li>
 
               <li className="mx-auto text-center text-pink-600">
-                <Link>Logout</Link>
+                <Link to="/">Logout</Link>
               </li>
             </ul>
           </div>

@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import swal from "sweetalert";
+import { CoffeeDataContext } from "../MainLayout/MainLayout";
 
 function AddCoffee() {
-  const [coffeDataFromDB, setCoffeDataFromDB] = useState([]);
+  const { fetchCoffeeData } = useContext(CoffeeDataContext);
+  const [coffeeDataFromDB, setCoffeeDataFromDB] = useState([]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -18,9 +21,8 @@ function AddCoffee() {
     const details = form.get("details");
     const photo = form.get("photo");
 
-    // You can now do something with these values, for example, send them to an API.
-    // Here, we'll just log the values to the console:
-    const coffeData = {
+    // Create a coffeeData object
+    const coffeeData = {
       coffeeName,
       availableQuantity,
       supplier,
@@ -29,28 +31,28 @@ function AddCoffee() {
       details,
       photo,
     };
+
+    // Send the coffeeData to your server (update the URL accordingly)
     fetch("http://localhost:5000/coffee", {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(coffeData),
+      body: JSON.stringify(coffeeData),
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.insertedId) {
-          swal("Good job!", "You clicked the button!", "success", {
-            button: "Aww yiss!",
-          });
+          // Refresh the coffeeData
+          fetchCoffeeData();
+          swal("Success", "Coffee added successfully!", "success");
         }
       });
   };
-  console.log(coffeDataFromDB);
 
   return (
     <div className="min-h-screen bg-[#F4F3F0] p-24">
-      <h2 className="text-3xl font-black">ADD Coffee</h2>
+      <h2 className="text-3xl font-black">Add Coffee</h2>
       <form onSubmit={handleSubmit}>
         {/* Coffee name and quantity */}
         <div className="md:flex">
@@ -67,7 +69,7 @@ function AddCoffee() {
               />
             </label>
           </div>
-          <div className="w-full form-control md:w-1/2 ml-4">
+          <div className="w-full ml-4 form-control md:w-1/2">
             <label className="label">
               <span className="label-text">Available Quantity</span>
             </label>
@@ -76,12 +78,12 @@ function AddCoffee() {
                 type="text"
                 name="availableQuantity"
                 placeholder="Available Quantity"
-                className="input input-bordered w-full"
+                className="w-full input input-bordered"
               />
             </label>
           </div>
         </div>
-        {/* Supply */}
+        {/* Supplier */}
         <div className="md:flex">
           <div className="form-control md:w-1/2">
             <label className="label">
@@ -96,7 +98,7 @@ function AddCoffee() {
               />
             </label>
           </div>
-          <div className="w-full form-control md:w-1/2 ml-4">
+          <div className="w-full ml-4 form-control md:w-1/2">
             <label className="label">
               <span className="label-text">Taste</span>
             </label>
@@ -105,7 +107,7 @@ function AddCoffee() {
                 type="text"
                 name="taste"
                 placeholder="Taste"
-                className="input input-bordered w-full"
+                className="w-full input input-bordered"
               />
             </label>
           </div>
@@ -125,7 +127,7 @@ function AddCoffee() {
               />
             </label>
           </div>
-          <div className="w-full form-control md:w-1/2 ml-4">
+          <div className="w-full ml-4 form-control md:w-1/2">
             <label className="label">
               <span className="label-text">Details</span>
             </label>
@@ -134,12 +136,12 @@ function AddCoffee() {
                 type="text"
                 name="details"
                 placeholder="Details"
-                className="input input-bordered w-full"
+                className="w-full input input-bordered"
               />
             </label>
           </div>
         </div>
-        <div className="form-control w-full my-4">
+        <div className="w-full my-4 form-control">
           <label className="label">
             <span className="label-text">Photo</span>
           </label>
@@ -154,7 +156,7 @@ function AddCoffee() {
         </div>
         <input
           type="submit"
-          className="btn btn-block bg-slate-600 text-gray-300 hover:text-gray-300 hover:bg-slate-600"
+          className="text-gray-300 btn btn-block bg-slate-600 hover:text-gray-300 hover:bg-slate-600"
           value="Submit"
         />
       </form>
