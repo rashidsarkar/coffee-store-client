@@ -61,6 +61,20 @@ function NavBar() {
           Add Coffee
         </NavLink>
       </li>
+      <li>
+        <NavLink
+          to="/users"
+          className={({ isActive, isPending }) =>
+            isPending
+              ? "pending"
+              : isActive
+              ? "text-pink-500 font-semibold"
+              : ""
+          }
+        >
+          Users
+        </NavLink>
+      </li>
     </>
   );
 

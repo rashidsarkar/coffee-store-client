@@ -8,6 +8,7 @@ import AddCoffe from "../Components/AddCoffe";
 
 import MyCoffe from "../Components/MyCoffe";
 import UpdateCoffe from "../Components/UpdateCoffe";
+import Users from "../Components/Users";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: "/addCoffee",
         element: <AddCoffe></AddCoffe>,
+      },
+      {
+        path: "/users",
+        element: <Users></Users>,
       },
       {
         path: "/updateCoffee/:id",
