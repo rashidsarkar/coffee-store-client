@@ -1,7 +1,21 @@
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../FireBase/AuthProvider";
+import { useContext } from "react";
 
 function NavBar() {
-  const user = false; // Replace with your actual authentication logic
+  const { loginEmPAss, googleSing, logOut, user } = useContext(AuthContext);
+  const handleSingOut = () => {
+    logOut()
+      .then(() => {
+        // Sign-out successful.
+      })
+      .catch((error) => {
+        // An error happened.
+        console.log(error);
+      });
+  };
+
+  // const user = false; // Replace with your actual authentication logic
 
   const navLinks = (
     <>
@@ -110,7 +124,9 @@ function NavBar() {
               </li>
 
               <li className="mx-auto text-center text-pink-600">
-                <Link to="/">Logout</Link>
+                <Link onClick={handleSingOut} to="/">
+                  Logout
+                </Link>
               </li>
             </ul>
           </div>
