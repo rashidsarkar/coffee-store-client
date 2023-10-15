@@ -59,7 +59,9 @@ function SignUp() {
                 photoURL: image,
                 email: email,
               });
-              const userForDB = { name, email, image };
+              console.log(currentUser);
+              const creatTime = currentUser.user.metadata.creationTime;
+              const userForDB = { name, email, image, creatTime };
               console.log(userForDB);
               axios
                 .post("http://localhost:5000/user", userForDB, {
