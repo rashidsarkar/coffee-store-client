@@ -105,7 +105,9 @@ function NavBar() {
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
-                <img src={user.photoURL || "userPhotoURL"} alt="User Photo" />
+                {/* <img src={user.photoURL || <FaCircleUser />} alt="User Photo" /> */}
+                {/* <img src={user.photoURL || <FaCircleUser />} alt="User Photo" /> */}
+                <img src={user.photoURL || "photo"} alt="User Photo" />
               </div>
             </label>
             <ul

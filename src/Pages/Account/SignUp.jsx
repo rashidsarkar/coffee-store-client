@@ -5,6 +5,7 @@ import { AuthContext } from "../../FireBase/AuthProvider";
 import { createContext, useContext, useEffect } from "react";
 import { PreveLoca } from "./Login";
 import swal from "sweetalert";
+import axios from "axios";
 
 function SignUp() {
   const { singupWithEmalPass, googleSing, user, setUser, updateProfiles } =
@@ -58,6 +59,20 @@ function SignUp() {
                 photoURL: image,
                 email: email,
               });
+              const userForDB = { name, email, image };
+              console.log(userForDB);
+              axios
+                .post("http://localhost:5000/user", userForDB, {
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                })
+                .then((res) => {
+                  console.log(res);
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
             })
             .catch();
 
