@@ -50,9 +50,9 @@ function Users() {
                 <td>{user.email}</td>
                 {/* <td>{user.image.length > 10 ? user.image.slice(0,10)}</td> */}
                 <td>
-                  {user.image.length > 10
-                    ? user.image.slice(0, 40) + "..."
-                    : user.image}
+                  {user?.image?.length > 10
+                    ? user?.image.slice(0, 40) + "..."
+                    : user?.image}
                 </td>
                 <td>{user.creatTime || "NO TIME"}</td>
                 <td>

@@ -61,7 +61,7 @@ function SignUp() {
               });
               console.log(currentUser);
               const creatTime = currentUser.user.metadata.creationTime;
-              const userForDB = { name, email, image, creatTime };
+              const userForDB = { name, email, creatTime };
               console.log(userForDB);
               axios
                 .post("http://localhost:5000/user", userForDB, {
