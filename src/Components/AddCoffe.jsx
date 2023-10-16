@@ -66,6 +66,7 @@ function AddCoffee() {
         console.log(error);
         // Handle any errors here
       });
+    e.currentTarget.reset();
   };
 
   return (
