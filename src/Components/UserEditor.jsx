@@ -24,6 +24,23 @@ function UserEditor() {
 
   const { name, email, image } = singleUser;
 
+  const handleUpdateUser = (e) => {
+    e.preventDefault();
+    console.log("updating");
+    const form = new FormData(e.currentTarget);
+    const email = form.get("email");
+    const name = form.get("name");
+    const image = form.get("image");
+    const updatedinfoUser = { name, email, image };
+    axios
+      .put(`http://localhost:5000/user/${id}`, updatedinfoUser, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res) => console.log(res.data));
+  };
+
   return (
     <div className="w-full max-w-md p-6 mx-auto mt-10 border rounded-lg shadow-lg">
       <h2 className="mb-4 text-2xl">Update User for {name}</h2>
@@ -33,7 +50,7 @@ function UserEditor() {
       ) : error ? (
         <p>An error occurred: {error.message}</p>
       ) : (
-        <form>
+        <form onSubmit={handleUpdateUser}>
           <div className="mb-4">
             <label className="block mb-2 text-sm font-semibold" htmlFor="name">
               Name:
