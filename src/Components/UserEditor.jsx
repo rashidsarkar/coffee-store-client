@@ -11,7 +11,9 @@ function UserEditor() {
   useEffect(() => {
     const singleUserFetch = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/user/${id}`);
+        const response = await axios.get(
+          `https://coffee-store-server-kzk1yfqrb-rashidrock558-gmailcom.vercel.app/user/${id}`
+        );
         setSingleUser(response.data);
         setLoading(false); // Mark loading as complete
       } catch (err) {
@@ -33,11 +35,15 @@ function UserEditor() {
     const image = form.get("image");
     const updatedinfoUser = { name, email, image };
     axios
-      .put(`http://localhost:5000/user/${id}`, updatedinfoUser, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+      .put(
+        `https://coffee-store-server-kzk1yfqrb-rashidrock558-gmailcom.vercel.app/user/${id}`,
+        updatedinfoUser,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
       .then((res) => console.log(res.data));
   };
 

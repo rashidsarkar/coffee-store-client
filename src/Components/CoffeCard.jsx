@@ -18,7 +18,9 @@ function CoffeeCard({ fetchCoffeeData, coffee }) {
     }).then((willDelete) => {
       if (willDelete) {
         axios
-          .delete(`http://localhost:5000/coffee/${_id}`)
+          .delete(
+            `https://coffee-store-server-kzk1yfqrb-rashidrock558-gmailcom.vercel.app/coffee/${_id}`
+          )
           .then((res) => {
             console.log(res.data);
 

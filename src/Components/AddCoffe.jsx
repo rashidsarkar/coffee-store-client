@@ -34,7 +34,7 @@ function AddCoffee() {
     };
 
     // Send the coffeeData to your server (update the URL accordingly)
-    // fetch("http://localhost:5000/coffee", {
+    // fetch("https://coffee-store-server-kzk1yfqrb-rashidrock558-gmailcom.vercel.app/coffee", {
     //   method: "POST",
     //   headers: {
     //     "content-type": "application/json",
@@ -50,11 +50,15 @@ function AddCoffee() {
     //     }
 
     axios
-      .post("http://localhost:5000/coffee", coffeeData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+      .post(
+        "https://coffee-store-server-kzk1yfqrb-rashidrock558-gmailcom.vercel.app/coffee",
+        coffeeData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
       .then((response) => {
         if (response.data.insertedId) {
           // Refresh the coffeeData

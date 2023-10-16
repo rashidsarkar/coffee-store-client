@@ -64,11 +64,15 @@ function SignUp() {
               const userForDB = { name, email, creatTime };
               console.log(userForDB);
               axios
-                .post("http://localhost:5000/user", userForDB, {
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                })
+                .post(
+                  "https://coffee-store-server-kzk1yfqrb-rashidrock558-gmailcom.vercel.app/user",
+                  userForDB,
+                  {
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                  }
+                )
                 .then((res) => {
                   console.log(res);
                 })

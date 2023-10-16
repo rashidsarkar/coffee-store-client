@@ -42,7 +42,7 @@ function UpdateCoffe() {
       details,
       photo,
     };
-    // fetch(`http://localhost:5000/coffee/${_id}`, {
+    // fetch(`https://coffee-store-server-kzk1yfqrb-rashidrock558-gmailcom.vercel.app/coffee/${_id}`, {
     //   method: "PUT",
     //   headers: {
     //     "content-type": "application/json",
@@ -55,11 +55,15 @@ function UpdateCoffe() {
     //     swal("Success", "Coffee Update successfully!", "success");
     //   });
     axios
-      .put(`http://localhost:5000/coffee/${_id}`, updatecoffeeData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+      .put(
+        `https://coffee-store-server-kzk1yfqrb-rashidrock558-gmailcom.vercel.app/coffee/${_id}`,
+        updatecoffeeData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
       .then((response) => {
         swal("Success", "Coffee Update successfully!", "success");
         fetchCoffeeData();

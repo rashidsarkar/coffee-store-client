@@ -11,7 +11,9 @@ function MainLayout() {
 
   const fetchCoffeeData = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/coffee");
+      const response = await axios.get(
+        "https://coffee-store-server-kzk1yfqrb-rashidrock558-gmailcom.vercel.app/coffee"
+      );
       setCoffeeData(response.data);
     } catch (error) {
       console.error(error);

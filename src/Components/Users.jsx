@@ -6,7 +6,9 @@ function Users() {
   const [userData, setUserData] = useState([]);
   const fetchUserData = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/user");
+      const response = await axios.get(
+        "https://coffee-store-server-kzk1yfqrb-rashidrock558-gmailcom.vercel.app/user"
+      );
       setUserData(response.data);
     } catch (error) {
       console.error(error);
@@ -17,9 +19,12 @@ function Users() {
     fetchUserData();
   }, []);
   const handleDeleteUser = (id) => {
-    fetch(`http://localhost:5000/user/${id}`, {
-      method: "DELETE",
-    })
+    fetch(
+      `https://coffee-store-server-kzk1yfqrb-rashidrock558-gmailcom.vercel.app/user/${id}`,
+      {
+        method: "DELETE",
+      }
+    )
       .then(() => fetchUserData())
       .then((data) => console.log(data));
   };
